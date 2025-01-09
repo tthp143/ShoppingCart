@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq.Expressions;
 using System.Security.Policy;
 using System.Web;
 using static System.Net.WebRequestMethods;
@@ -14,14 +15,41 @@ namespace ShoppingCart
             InitializeComponent();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private double TotalPrice(double beveragePrice, double foodPrice)
         {
 
+            double totalPrice = beveragePrice + foodPrice;
+
+
+            return totalPrice;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkCoffee.Checked)
+            {
+                CostBox1.Enabled = true;
+                PieceBox1.Enabled = true;
+            }
+            else
+            {
+                CostBox1.Enabled = false;
+                PieceBox1.Enabled = false;
+            }
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (chkGreentea.Checked)
+            {
+                CostBox2.Enabled = true;
+                PieceBox2.Enabled = true;
+            }
+            else
+            {
+                CostBox2.Enabled = false;
+                PieceBox2.Enabled = false;
+            }
         }
 
         private void CostBox1_TextChanged(object sender, EventArgs e)
@@ -32,40 +60,67 @@ namespace ShoppingCart
         private void CheckOutbutton_Click(object sender, EventArgs e)
         {
 
+
             string inputC1 = CostBox1.Text;
             string inputP1 = PieceBox1.Text;
             string inputC2 = CostBox2.Text;
             string inputP2 = PieceBox2.Text;
+            string inputC3 = CostBox3.Text;
+            string inputP3 = PieceBox3.Text;
+            string inputC4 = CostBox4.Text;
+            string inputP4 = PieceBox4.Text;
 
-            double Cf_c1 = 0;
-            double Cf_p1 = 0;
-            double Gt_c1 = 0;
-            double Gt_p1 = 0;
+            double Cf_cost = 0;
+            double Cf_piece = 0;
+            double Gt_cost = 0;
+            double Gt_piece = 0;
+            double Piz_cost = 0;
+            double Piz_piece = 0;
+            double Friedchick_cost = 0;
+            double Friedchick_piece = 0;
+
 
             try
             {
-                if (chkCoffee1.Checked)
+                if (chkCoffee.Checked)
                 {
-                    Cf_c1 = double.Parse(inputC1);
-                    Cf_p1 = double.Parse(inputP1);
+                    Cf_cost = double.Parse(inputC1);
+                    Cf_piece = double.Parse(inputP1);
 
                 }
-                if (chkGreentea1.Checked)
+                if (chkGreentea.Checked)
                 {
-                    Gt_c1 = double.Parse(inputC2);
-                    Gt_p1 = double.Parse(inputP2);
+                    Gt_cost = double.Parse(inputC2);
+                    Gt_piece = double.Parse(inputP2);
+
+                }
+                if (chkPizza.Checked)
+                {
+                    Piz_cost = double.Parse(inputC3);
+                    Piz_piece = double.Parse(inputP3);
+
+                }
+                if (chkFriedChicken.Checked)
+                {
+                    Friedchick_cost = double.Parse(inputC4);
+                    Friedchick_piece = double.Parse(inputP4);
 
                 }
             }
             catch (FormatException)
             {
-                MessageBox.Show("ใส่บ่ครบบักงัว");
+                MessageBox.Show("กรุณาใส่ราคา และ จำนวนชิ้น ให้ครบด้วยครับ/ค่ะ");
 
             }
-            double sum1 = Cf_c1 * Cf_p1;
-            double sum2 = Gt_c1 * Gt_p1;
-            double sum = sum1 + sum2;
-            TotalBox.Text = sum.ToString();
+
+            double sum1 = Cf_cost * Cf_piece;
+            double sum2 = Gt_cost * Gt_piece;
+            double sum3 = Piz_cost * Piz_piece;
+            double sum4 = Friedchick_cost * Friedchick_piece;
+            double sumBav = sum1 + sum2;
+            double sumFood = sum3 + sum4;
+            double allsum = TotalPrice(sumBav, sumFood);
+            TotalBox.Text = allsum.ToString();
 
 
 
@@ -74,11 +129,59 @@ namespace ShoppingCart
 
 
 
+            if (chkAll_disc.Checked)
+            {
+                double All_discount = 0;
+                try
+                {
+                    All_discount = int.Parse(All_disc.Text);
+                    All_discount = allsum - (allsum * All_discount / 100);
+                    TotalBox.Text = All_discount.ToString();
 
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("กรุณาใส่ส่วนลดในช่องด้วยครับ/ค่ะ");
+                }
+            }
 
+            if (chkBaverage_disc.Checked)
+            {
+                double Baverage_discount = 0;
+                double SumBav_discount = 0;
+                try
+                {
+                    Baverage_discount = int.Parse(Bav_disc.Text);
+                    Baverage_discount = sumBav - (sumBav * Baverage_discount / 100);
+                    SumBav_discount = Baverage_discount + sumFood;
+                    TotalBox.Text = SumBav_discount.ToString();
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("กรุณาใส่ส่วนลดในช่องด้วยครับ/ค่ะ");
+                }
 
+            }
+            if (chkFood_disc.Checked)
+            {
+                double Food_discount = 0;
+                double SumFood_discount = 0;
+                try
+                {
+                    Food_discount = int.Parse(Food_disc.Text);
+                    Food_discount = sumFood - (sumFood * Food_discount / 100);
+                    SumFood_discount = Food_discount + sumBav;
+                    TotalBox.Text = SumFood_discount.ToString();
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("กรุณาใส่ส่วนลดในช่องด้วยครับ/ค่ะ");
+                }
+
+            }
 
         }
+
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -97,12 +200,25 @@ namespace ShoppingCart
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+
+
+            double cash = 0;
+            try
+            {
+                cash = double.Parse(cash1.Text);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("กรุณาใส่จำนวนเงินด้วยครับ/ค่ะ");
+            }
+
+            
             string total = TotalBox.Text;
-            string cash = cash1.Text;
             double totalfill = double.Parse(total);
-            double cashfill = double.Parse(cash);
-            double sum = cashfill - totalfill;
-            Change1.Text = sum.ToString();
+            double sum = cash - totalfill;
+            Change.Text = sum.ToString();
+
 
             double One_thousand = 0;
             double five_hundred = 0;
@@ -112,8 +228,13 @@ namespace ShoppingCart
             double ten_thb = 0;
             double five_thb = 0;
             double one_thb = 0;
+            double fifty_stang = 0;
+            double twentyfive_stang = 0;
+            double ten_stang = 0;
+            double zero_five = 0;
+            double zero_one = 0;
 
-            while (sum > 0)
+            while (sum > 0.001)
             {
                 if (sum >= 1000)
                 {
@@ -155,6 +276,31 @@ namespace ShoppingCart
                     sum -= 1;
                     one_thb++;
                 }
+                else if (sum >= 0.50)
+                {
+                    sum -= 0.50;
+                    fifty_stang++;
+                }
+                else if (sum >= 0.25)
+                {
+                    sum -= 0.25;
+                    twentyfive_stang++;
+                }
+                else if (sum >= 0.10)
+                {
+                    sum -= 0.10;
+                    ten_stang++;
+                }
+                else if (sum >= 0.05)
+                {
+                    sum -= 0.05;
+                    zero_five++;
+                }
+                else if (sum >= 0.01)
+                {
+                    sum -= 0.01;
+                    zero_one++;
+                }
 
 
             }
@@ -167,6 +313,13 @@ namespace ShoppingCart
             ten.Text = ten_thb.ToString();
             five.Text = five_thb.ToString();
             one.Text = one_thb.ToString();
+            fifty_stng.Text = fifty_stang.ToString();
+            twentyfive_stng.Text = twentyfive_stang.ToString();
+            ten_stng.Text = ten_stang.ToString();
+            zerozero_five.Text = zero_five.ToString();
+            zerozero_one.Text = zero_one.ToString();
+
+
         }
 
 
@@ -187,5 +340,110 @@ namespace ShoppingCart
         {
 
         }
+
+        private void Baverage_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox2_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (chkBaverage_disc.Checked)
+            {
+                chkAll_disc.Checked = false;
+                chkFood_disc.Checked = false;
+                Bav_disc.Enabled = true;
+            }
+
+            else
+            {
+                Bav_disc.Enabled = false;
+            }
+        }
+
+        private void label12_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox2_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkAll_disc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAll_disc.Checked)
+            {
+                chkBaverage_disc.Checked = false;
+                chkFood_disc.Checked = false;
+                All_disc.Enabled = true;
+            }
+
+            else
+            {
+                All_disc.Enabled = false;
+            }
+        }
+
+        private void chkFood_disc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFood_disc.Checked)
+            {
+                chkAll_disc.Checked = false;
+                chkBaverage_disc.Checked = false;
+                Food_disc.Enabled = true;
+            }
+
+            else
+            {
+                Food_disc.Enabled = false;
+            }
+        }
+
+        private void chkPizza_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPizza.Checked)
+            {
+                CostBox3.Enabled = true;
+                PieceBox3.Enabled = true;
+            }
+            else
+            {
+                CostBox3.Enabled = false;
+                PieceBox3.Enabled = false;
+            }
+        }
+
+        private void chkFriedChicken_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFriedChicken.Checked)
+            {
+                CostBox4.Enabled = true;
+                PieceBox4.Enabled = true;
+            }
+            else
+            {
+                CostBox4.Enabled = false;
+                PieceBox4.Enabled = false;
+            }
+        }
+
+        private void cash1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
