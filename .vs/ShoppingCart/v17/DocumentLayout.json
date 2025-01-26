@@ -9,6 +9,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{F6C44C04-3BB1-4158-AE67-C3088FE37846}|ShoppingCart.csproj|d:\\book\u0027s oop\\shoppingcart\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F6C44C04-3BB1-4158-AE67-C3088FE37846}|ShoppingCart.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F6C44C04-3BB1-4158-AE67-C3088FE37846}|ShoppingCart.csproj|d:\\book\u0027s oop\\shoppingcart\\item1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F6C44C04-3BB1-4158-AE67-C3088FE37846}|ShoppingCart.csproj|solutionrelative:item1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +22,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Item1.cs",
+              "DocumentMoniker": "D:\\book\u0027s oop\\ShoppingCart\\Item1.cs",
+              "RelativeDocumentMoniker": "Item1.cs",
+              "ToolTip": "D:\\book\u0027s oop\\ShoppingCart\\Item1.cs",
+              "RelativeToolTip": "Item1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-21T03:01:01.788Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -28,7 +45,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "D:\\book\u0027s oop\\ShoppingCart\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAswHoAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAADIAAAAAAAAAAAAcwDYAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-24T03:27:26.113Z",
               "EditorCaption": ""

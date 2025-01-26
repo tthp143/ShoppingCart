@@ -8,11 +8,74 @@ using static System.Net.WebRequestMethods;
 
 namespace ShoppingCart
 {
+    
     public partial class Form1 : Form
     {
+        Item1 itemcoffee = new Item1();
+        Item1 itemgreentea = new Item1();
+        Item1 itempizza = new Item1();
+        Item1 itemfriedchicken = new Item1();
+        discount itemdiscount = new discount();
         public Form1()
         {
             InitializeComponent();
+            
+            //Coffee
+            itemcoffee.name = "Coffee";
+            itemcoffee.price = 50 ;
+            itemcoffee.quantity = 0;
+            CostBox1.Text = itemcoffee.price.ToString();
+            PieceBox1.Text = itemcoffee.quantity.ToString();
+            CostBox1.ReadOnly = true;
+            itemcoffee.check = chkCoffee.Checked;
+
+            //Greantea
+            itemgreentea.name = "Greentea";
+            itemgreentea.price = 45;
+            itemgreentea.quantity = 0;
+            CostBox2.Text = itemgreentea.price.ToString();
+            PieceBox2.Text = itemgreentea .quantity.ToString();
+            CostBox2.ReadOnly = true;
+            itemgreentea.check = chkGreentea.Checked;
+
+            //Pizza
+            itempizza.name = "Pizza";
+            itempizza.price = 100;
+            itempizza.quantity = 0;
+            CostBox3.Text = itempizza.price.ToString();
+            PieceBox3.Text = itempizza .quantity.ToString();
+            CostBox3.ReadOnly = true;
+            itempizza.check = chkPizza.Checked;
+
+            //Fried Chicken
+            itemfriedchicken.name = "Fried Chicken";
+            itemfriedchicken.price = 50;
+            itemfriedchicken.quantity = 0;
+            CostBox4.Text = itemfriedchicken.price.ToString();
+            PieceBox4.Text = itemfriedchicken.quantity.ToString();
+            CostBox4.ReadOnly = true;
+            itemfriedchicken.check = chkFriedChicken.Checked;
+
+            //All Discount
+            itemdiscount.name = "Alldiscount";
+            itemdiscount.percent = 0;
+            All_disc.Text = itemdiscount.percent.ToString();
+            itemdiscount.check = chkAll_disc.Checked;
+
+            //Baverage Discount
+            itemdiscount.name = "Baveragediscount";
+            itemdiscount.percent = 0;
+            Bav_disc.Text = itemdiscount.percent.ToString();
+            itemdiscount.check = chkBaverage_disc.Checked;
+
+            //Food Discount
+            itemdiscount.name = "Fooddiscount";
+            itemdiscount.percent = 0;
+            Food_disc.Text = itemdiscount.percent.ToString();
+            itemdiscount.check = chkFood_disc.Checked;
+
+
+
         }
 
         private double TotalPrice(double beveragePrice, double foodPrice)
